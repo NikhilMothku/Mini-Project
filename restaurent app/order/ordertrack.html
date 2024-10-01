@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <style>
+        body { background-image :url("C:\Users\nikhi\OneDrive\Desktop\restaurent app\order\images\grid_image2.png");
+           background-repeat: no-repeat;
+           background-attachment: fixed;
+           background-size: 100%;
+            font-family: Arial, sans-serif;
+
+            0
+            backgrdownload\ \(2\).jpeg
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .tracking-container {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .order-status {
+            margin-top: 20px;
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .order-status p {
+            margin: 5px 0;
+        }
+
+        .order-status .status {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tracking-container">
+    <h2>Track Your Order</h2>
+    <form id="trackingForm">
+        <input type="text" id="orderNumber" placeholder="Enter your order number" required>
+        <button type="submit">Track Order</button>
+    </form>
+    <div class="order-status" id="orderStatus" style="display:none;">
+        <p>Order Number: <span id="orderID"></span></p>
+        <p>Status: <span class="status" id="statusText">In Transit</span></p>
+        <p>Expected Delivery: <span id="deliveryDate">20th October 2024</span></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('trackingForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var orderNumber = document.getElementById('orderNumber').value;
+
+        // Mock logic to display order status
+        if(orderNumber) {
+            document.getElementById('orderID').textContent = orderNumber;
+            document.getElementById('orderStatus').style.display = 'block';
+        } else {
+            document.getElementById('orderStatus').style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+

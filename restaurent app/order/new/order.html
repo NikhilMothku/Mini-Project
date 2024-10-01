@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order - Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .order-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-form label {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .order-form input, .order-form select, .order-form textarea {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .order-form button {
+            padding: 12px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .order-form button:hover {
+            background-color: #218838;
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-container">
+        <h1>New Order</h1>
+        <p>Place your order below and we'll get it ready for you!</p>
+
+        <form action="" method="POST" class="order-form">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="order-type">Order Type:</label>
+            <select id="order-type" name="order-type" required>
+                <option value="dine-in">Dine-In</option>
+                <option value="takeaway">Takeaway</option>
+                <option value="delivery">Delivery</option>
+            </select>
+
+            <label for="menu-items">Order Details (e.g., Dish names, quantities):</label>
+            <textarea id="menu-items" name="menu-items" rows="5" required></textarea>
+
+            <label for="address" id="address-label" style="display: none;">Delivery Address (for Delivery orders only):</label>
+            <textarea id="address" name="address" rows="3" style="display: none;"></textarea>
+
+            <button type="submit">Place Order</button>
+        </form>
+
+        <!-- Success or Error Message -->
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $name = htmlspecialchars($_POST['name']);
+            $email = htmlspecialchars($_POST['email']);
+            $phone = htmlspecialchars($_POST['phone']);
+            $orderType = htmlspecialchars($_POST['order-type']);
+            $menuItems = htmlspecialchars($_POST['menu-items']);
+            $address = htmlspecialchars($_POST['address']);
+
+            // Update this email address with the restaurant's email
+            $to = "restaurant@example.com";
+            $subject = "New Order: $orderType";
+            $body = "Name: $name\nEmail: $email\nPhone: $phone\nOrder Type: $orderType\nOrder Details:\n$menuItems";
+
+            if ($orderType == "delivery") {
+                $body .= "\nDelivery Address:\n$address";
+            }
+
+            if (mail($to, $subject, $body)) {
+                echo "<p class='success-message'>Thank you! Your order has been placed.</p>";
+            } 
+          
+    </div>
+
+    <script>
+        const orderTypeSelect = document.getElementById('order-type');
+        const addressLabel = document.getElementById('address-label');
+        const addressField = document.getElementById('address');
+
+        // Show/hide the address field based on the order type
+        orderTypeSelect.addEventListener('change', function() {
+            if (orderTypeSelect.value === 'delivery') {
+                addressLabel.style.display = 'block';
+                addressField.style.display = 'block';
+                addressField.required = true;
+            } else {
+                addressLabel.style.display = 'none';
+                addressField.style.display = 'none';
+                addressField.required = false;
+            }
+        });
+    </script>
+</body>
+</html>

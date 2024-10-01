@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: 'Lucida Sans Unicode', sans-serif;
+            margin: 0;
+            background-image: url('https://i.pinimg.com/originals/a1/55/14/a15514a59abc0ca91bbeeb6c155a3d69.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            padding-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 36px;
+            text-shadow: 2px 2px #000;
+            color: #ff7f50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ff7f50;
+            font-size: 20px;
+        }
+
+        td {
+            font-size: 18px;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #333;
+        }
+
+        .form-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #ff7f50;
+            font-size: 26px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background-color: #ff7f50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+
+        <!-- Cart Items Table -->
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be dynamically inserted here -->
+            </tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="2">Total</td>
+                    <td id="totalPrice">₹0</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Payment Form -->
+        <div class="form-container">
+            <h2>Payment Information</h2>
+            <form id="paymentForm">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" required placeholder="Enter card number" data-mask="0000 0000 0000 0000">
+
+                <label for="cardHolder">Card Holder Name</label>
+                <input type="text" id="cardHolder" name="cardHolder" required placeholder="Enter cardholder name">
+
+                <label for="expiryDate">Expiry Date</label>
+                <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY" data-mask="00 / 00">
+
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" name="cvv" required placeholder="Enter CVV" data-mask="000">
+
+                <button type="submit" class="submit-btn">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fetch the cart data from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = localStorage.getItem('total') || 0;
+
+        // Function to display the cart items in the table
+        function displayCartItems() {
+            const cartTableBody = document.querySelector('#cartTable tbody');
+            cartTableBody.innerHTML = ''; // Clear any existing rows
+
+            cart.forEach(cartItem => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${cartItem.item}</td>
+                    <td>${cartItem.quantity}</td>
+                    <td>₹${cartItem.price}</td>
+                `;
+                cartTableBody.appendChild(row);
+            });
+
+            // Update total price
+            document.getElementById('totalPrice').innerText = `₹${total}`;
+        }
+
+        // Display cart items on page load
+        displayCartItems();
+
+        // Handle form submission (you can add real payment processing here)
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Payment submitted successfully!');
+            // You can redirect to a confirmation page or reset the cart after successful payment
+            localStorage.removeItem('cart');
+            localStorage.removeItem('total');
+            window.location.href = 'http://127.0.0.1:5500/PROJECT/index.html'; // Redirect after payment
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</body>
+</html>

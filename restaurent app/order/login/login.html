@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Login</title>
+    <style>
+        /* General Body Style */
+        body { 
+            background-image: url(https://img.freepik.com/free-photo/pre-prepared-food-showcasing-ready-eat-delicious-meals-go_23-2151431678.jpg?ga=GA1.1.1837784953.1717822370&semt=ais_hybrid);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+        }
+
+        /* Main Container */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.233); /* Slightly transparent white background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        /* Form Title */
+        .login-container h2 {
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        /* Input Fields */
+        .login-container input[type="text"], .login-container input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #252424;
+        }
+
+        /* Submit Button */
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Submit Button Hover Effect */
+        .login-container input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Link */
+        .login-container a {
+            display: block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Additional Text */
+        .login-container p {
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .login-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2 style="color: white;">TSUBAKI-AN Login</h2>
+    <form action="[login_action]" method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+    </form>
+    <p>Forgot your password? <a href="[forgot_password_link]">New User Click Here</a></p>
+</div>
+
+</body>
+</html>
